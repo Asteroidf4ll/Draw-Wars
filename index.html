@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tea-paint</title>
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}"
+>
+</head>
+<body>
+    <main class="board-wrap">
+        <div id="roomOverlay" class="room-overlay">
+
+        <div class="room-card">
+
+            <h2>多人协作画板</h2>
+
+            <div id="userNameText"></div>
+
+            <input
+                id="roomInput"
+                maxlength="4"
+                placeholder="输入4位房间号"
+            >
+
+            <button id="joinRoomBtn">
+                进入房间
+            </button>
+
+        </div>
+
+    </div>
+        <div class="toolbar">
+            <button id="activeColorPicker" class="color-trigger" type="button" title="调色"></button>
+            <button id="brushPanelBtn" type="button">笔刷</button>
+            <button id="eraserPanelBtn" type="button" class="eraser">橡皮擦</button>
+            <button id="panToolBtn" type="button" class="secondary">视角拖动</button>
+            <div class="group">
+                <label for="sizeSlider">大小</label>
+                <input id="sizeSlider" type="range" min="1" max="500" value="3">
+                <input id="sizeInput" type="number" min="1" max="500" value="3">
+                <span id="sizeValue">px</span>
+            </div>
+            <div class="opacity-control">
+                <span>透明度</span>
+                <input
+                    type="range"
+                    id="opacitySlider"
+                    min="1"
+                    max="100"
+                    value="100"
+                >
+                <input
+                    type="number"
+                    id="opacityInput"
+                    min="1"
+                    max="100"
+                    value="100"
+                >
+                <span id="opacityValue">100%</span>
+            </div>
+            <button id="undoBtn" type="button" class="secondary">撤销</button>
+            <button id="redoBtn" type="button" class="secondary">重做</button>
+            <button id="saveBtn" type="button">保存 PNG</button>
+            <button id="clearBtn" type="button">清空当前图层</button>
+        </div>
+        
+
+        <div class="sub-toolbar">
+            <div class="group">
+                <label for="canvasWidthInput">宽</label>
+                <input id="canvasWidthInput" type="number" min="800" max="5000" value="800">
+                <label for="canvasHeightInput">高</label>
+                <input id="canvasHeightInput" type="number" min="600" max="5000" value="600">
+                <button id="resizeCanvasBtn" type="button" class="secondary">修改画布</button>
+            </div>
+            <div class="group">
+                <label for="zoomSlider">缩放</label>
+                <input id="zoomSlider" type="range" min="10" max="300" step="5" value="100">
+                <input id="zoomInput" type="number" min="10" max="300" step="1" value="100">
+                <span>%</span>
+                <button id="resetZoomBtn" type="button" class="secondary">100%</button>
+            </div>
+        </div>
+
+        <div id="colorPopover" class="color-popover">
+            <div class="dual-color-row">
+                <button id="primarySlot" class="slot-chip active" type="button" title="前景色"></button>
+                <button id="secondarySlot" class="slot-chip" type="button" title="背景色"></button>
+                <button id="swapColorsBtn" type="button">切换颜色</button>
+            </div>
+            <div class="mode-tabs">
+                <button id="rgbModeBtn" type="button" class="active">RGB 模式</button>
+                <button id="wheelModeBtn" type="button">色轮模式</button>
+            </div>
+            <div id="rgbPanel" class="color-panel active">
+                <div class="rgb-sv-wrap">
+                    <canvas id="rgbSvCanvas" width="240" height="240"></canvas>
+                </div>
+                <div class="hue-row">
+                    <label for="rgbHueRange">H</label>
+                    <input id="rgbHueRange" type="range" min="0" max="360" value="0">
+                </div>
+                <div class="control-row">
+                    <label for="rRange">R</label>
+                    <input id="rRange" type="range" min="0" max="255" value="34">
+                    <input id="rInput" type="number" min="0" max="255" value="34">
+                </div>
+                <div class="control-row">
+                    <label for="gRange">G</label>
+                    <input id="gRange" type="range" min="0" max="255" value="34">
+                    <input id="gInput" type="number" min="0" max="255" value="34">
+                </div>
+                <div class="control-row">
+                    <label for="bRange">B</label>
+                    <input id="bRange" type="range" min="0" max="255" value="34">
+                    <input id="bInput" type="number" min="0" max="255" value="34">
+                </div>
+            </div>
+            <div id="wheelPanel" class="color-panel">
+                <div class="color-wheel-wrap">
+                    <canvas id="wheelCanvas" width="240" height="240"></canvas>
+                </div>
+                <div class="control-row">
+                    <label for="hRange">H</label>
+                    <input id="hRange" type="range" min="0" max="360" value="0">
+                    <input id="hInput" type="number" min="0" max="360" value="0">
+                </div>
+                <div class="control-row">
+                    <label for="sRange">S</label>
+                    <input id="sRange" type="range" min="0" max="100" value="0">
+                    <input id="sInput" type="number" min="0" max="100" value="0">
+                </div>
+                <div class="control-row">
+                    <label for="vRange">V</label>
+                    <input id="vRange" type="range" min="0" max="100" value="13">
+                    <input id="vInput" type="number" min="0" max="100" value="13">
+                </div>
+            </div>
+            <div class="history-title">历史颜色（落笔后记录）</div>
+            <div class="history-grid" id="colorHistoryGrid"></div>
+        </div>
+
+        <div class="picker-panels" id="pickerPanels">
+            <section id="brushPanel" class="picker-panel" data-panel="brush">
+                <div class="tool-grid" id="brushGrid"></div>
+            </section>
+            <section id="eraserPanel" class="picker-panel" data-panel="eraser">
+                <div class="tool-grid" id="eraserGrid"></div>
+            </section>
+        </div>
+
+        <section class="workspace">
+            <section class="canvas-zone" id="canvasZone">
+                <div class="canvas-stage" id="canvasStage">
+                    <div id="layerStack" class="layer-stack"></div>
+                    <div id="brushCursor" aria-hidden="true"></div>
+                </div>
+            </section>
+        </section>
+
+        <button id="layerDrawerToggle" class="layer-drawer-toggle" type="button">图层</button>
+        <aside id="layerDrawer" class="layer-drawer">
+            <div class="layer-drawer-header">
+                <h3>图层</h3>
+                <button id="addLayerBtn" type="button">添加图层</button>
+            </div>
+            <div id="layerList" class="layer-drawer-body"></div>
+        </aside>
+        <div id="topToast" class="top-toast"></div>
+    </main>
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+
+<script
+    src="{{ url_for('static', filename='script.js') }}"
+></script>
+</body>
+</html>
