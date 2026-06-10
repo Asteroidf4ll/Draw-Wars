@@ -46,16 +46,16 @@
    git clone https://github.com/asteroidf4ll/Draw-Wars.git
    cd Draw-Wars
 2. **安装依赖**
-pip install flask
-pip install flask-socketio
-pip install flask flask-socketio eventlet
+- pip install flask
+- pip install flask-socketio
+- pip install flask flask-socketio eventlet
 3. **启动服务器**
 python app.py
 4.**访问应用**
-本机访问：浏览器打开 http://localhost:5000
-局域网其他设备：访问主机 IP + :5000（例如 http://192.168.1.100:5000）
+- 本机访问：浏览器打开 http://localhost:5000
+- 局域网其他设备：访问主机 IP + :5000（例如 http://192.168.1.100:5000）
 5.**开始绘画**
-输入 4 位房间号加入房间，多台设备可同时体验实时协作。
+- 输入 4 位房间号加入房间，多台设备可同时体验实时协作。
 ## 📖 使用说明
 ### 基础操作
 - 绘画：鼠标左键拖动画布
@@ -76,31 +76,31 @@ python app.py
 - 自动保存：房间状态每 60 秒自动保存，也可手动点击「导出快照」
 - 恢复：重新进入房间时自动加载最近快照
 ## 📁 项目结构
-Draw-Wars/
-├── app.py                 # Flask 后端主程序
-├── templates/
-│   └── index.html         # 前端页面
-├── static/
-│   ├── style.css          # 样式表
-│   └── script.js          # 前端逻辑（绘画、WebSocket、事件等）
-├── snapshots/             # 房间快照存储（自动生成）
-├── static/image/          # 预设速写挑战图片（可按分类存放）
-└── README.md              # 本文件
+- Draw-Wars/
+- ├── app.py                 # Flask 后端主程序
+- ├── templates/
+- │   └── index.html         # 前端页面
+- ├── static/
+- │   ├── style.css          # 样式表
+- │   └── script.js          # 前端逻辑（绘画、WebSocket、事件等）
+- ├── snapshots/             # 房间快照存储（自动生成）
+- ├── static/image/          # 预设速写挑战图片（可按分类存放）
+- └── README.md              # 本文件
 ## ❓ 常见问题
 - Q: 其他设备无法连接？
-  A: 检查防火墙是否允许 5000 端口，或关闭 Windows 防火墙；确保所有设备在同一局域网。
+- A: 检查防火墙是否允许 5000 端口，或关闭 Windows 防火墙；确保所有设备在同一局域网。
 
 - Q: 画面不同步或延迟高？
-  A: 确认网络稳定；重启服务器；减少同时在线人数。
+- A: 确认网络稳定；重启服务器；减少同时在线人数。
 
 - Q: 快照无法恢复画布？
-  A: 检查 snapshots/ 文件夹是否有对应房间号的 .json 文件；若无，手动点击「导出快照」保存一次。
+- A: 检查 snapshots/ 文件夹是否有对应房间号的 .json 文件；若无，手动点击「导出快照」保存一次。
 
 - Q: 撤回/重做功能偶尔不同步？
-  A: 已知问题：在极端并发快速连续操作时可能状态不一致。建议谨慎使用或通过「随机事件」中的共享撤回机制体验。
+- A: 已知问题：在极端并发快速连续操作时可能状态不一致。建议谨慎使用或通过「随机事件」中的共享撤回机制体验。
 
 - Q: 如何自定义速写挑战题目？
-  A: 在聊天界面点击「管理题目」按钮，可添加自定义文字题目或上传参考图（base64）。预设图片请放入 static/image/分类名/ 文件夹下。
+- A: 在聊天界面点击「管理题目」按钮，可添加自定义文字题目或上传参考图（base64）。预设图片请放入 static/image/分类名/ 文件夹下。
 
 ## 🤝 贡献与许可
 - 许可：本项目为课程作业，仅供学习交流使用。
