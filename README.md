@@ -75,7 +75,7 @@ python app.py
 - 自动保存：房间状态每 60 秒自动保存，也可手动点击「导出快照」
 - 恢复：重新进入房间时自动加载最近快照
 ## 📁 项目结构
-- Draw-Wars/
+- Drawar/
 - ├── app.py                 # Flask 后端主程序
 - ├── templates/
 - │   └── index.html         # 前端页面
@@ -106,5 +106,5 @@ python app.py
 - 致谢：感谢 AI 辅助工具（ChatGPT / Codex）在需求分析、代码生成、调试修复和文档撰写中的帮助。
 
 ## 🔗 相关链接
-- GitHub 仓库：https://github.com/asteroidf4ll/Drawars
+- GitHub 仓库：https://github.com/asteroidf4ll/Drawar
 
