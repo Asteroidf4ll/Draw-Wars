@@ -106,5 +106,5 @@ python app.py
 - 致谢：感谢 AI 辅助工具（ChatGPT / Codex）在需求分析、代码生成、调试修复和文档撰写中的帮助。
 
 ## 🔗 相关链接
-- GitHub 仓库：https://github.com/asteroidf4ll/Draw-Wars
+- GitHub 仓库：https://github.com/asteroidf4ll/Drawars
 
