@@ -2,7 +2,6 @@
 
 **Drawar** 是一个面向学生、绘画爱好者及线上聚会场景的多人实时绘画平台。在传统茶绘（多人实时协作画板）基础上，融入了**随机事件**、**速写挑战**、**聊天表情**等游戏化机制，让绘画过程兼具创作、竞技与社交娱乐属性。
 
-> 项目原名 tea-paint，后更名为 Drawar（Draw + War），强调绘画中的竞争与趣味。
 
 ## ✨ 功能特性
 
@@ -43,8 +42,8 @@
 
 1. **克隆仓库**
    ```bash
-   git clone https://github.com/asteroidf4ll/Draw-Wars.git
-   cd Draw-Wars
+   git clone https://github.com/asteroidf4ll/Drawar.git
+   cd Drawar
 2. **安装依赖**
 - pip install flask
 - pip install flask-socketio
